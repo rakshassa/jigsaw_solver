@@ -1,9 +1,18 @@
-# side with number=0 is an edge
-# The sides of the pieces are named sequentially, clockwise, starting with the left side.
-# Each piece is numbered sequentially, and the first piece is the piece number 1.
+"""
+side with number=0 is an edge
+The sides of the pieces are named sequentially, clockwise, starting with the left side.
+Each piece is numbered sequentially, and the first piece is the piece number 1.
+"""
 
 class Sorter:
+    """
+    Sorts pieces into 3 groups: corners, edges, and middles
+    """
     def sort_pieces(self, pieces):
+        """
+        Sorts pieces into 3 groups: corners, edges, and middles
+        """
+
         corners = []
         sides = []
         middles = []

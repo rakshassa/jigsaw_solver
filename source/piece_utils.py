@@ -1,64 +1,89 @@
+"""
+Provides utility functions for manipulating and validating puzzle pieces.
+"""
+
 import constants
 
-class PieceUtils(object):
-    # turn the piece. Keep the same ORDER - just rotate the array
+class PieceUtils:
+    """
+    A utility class for performing operations on puzzle pieces,
+    such as rotating pieces and checking if they fit in a given position.
+    """
+
     def rotate_piece(self, side_ids):
+        """
+        Rotates a piece by shifting its side IDs.
+
+        :param side_ids: List of side IDs representing the edges of the piece.
+        :return: A new list of side IDs after rotation.
+        """
         first = side_ids[0]
         rotated = side_ids[1:]
-        rotated.append(first) # remove the first element and add it to the end
+        rotated.append(first)  # Remove the first element and add it to the end
         return rotated
 
-    # returns True if the specified edges have side_id=0 (meaning: a flat side on the piece)
     def edges_valid(self, vertical, horizontal, side_ids):
-        # since the constants used for vert/hor are good indexes
-        if vertical != None and side_ids[vertical] != 0: return False
-        if horizontal != None and side_ids[horizontal] != 0: return False
+        """
+        Checks if the specified edges have side_id=0, meaning a flat edge.
 
+        :param vertical: The vertical position (TOP or BOTTOM) to check.
+        :param horizontal: The horizontal position (LEFT or RIGHT) to check.
+        :param side_ids: List of side IDs representing the edges of the piece.
+        :return: True if both specified edges are flat (0), otherwise False.
+        """
+        if vertical is not None and side_ids[vertical] != 0:
+            return False
+        if horizontal is not None and side_ids[horizontal] != 0:
+            return False
         return True
 
-    # returns TRUE if the piece fits against all non-NONE adjacent pieces
     def does_piece_fit(self, row, col, piece, positions):
-        # print("Trying Piece: %s fits at row: %i and col: %i" % (str(piece), row, col))
+        """
+        Checks if a piece fits against all non-None adjacent pieces in the puzzle grid.
+
+        :param row: The row position of the piece.
+        :param col: The column position of the piece.
+        :param piece: The piece being placed, represented by a list where the first element
+                      is the piece ID and the rest are side IDs.
+        :param positions: 2D list representing the current puzzle grid.
+        :return: True if the piece fits, otherwise False.
+        """
         side_ids = piece[1:]
-        # check the piece above me
+
+        # Check the piece above
         side_id = side_ids[constants.TOP]
         if side_id != 0:
             above = positions[row-1][col]
-            if above != None:
+            if above is not None:
                 compare_side_ids = above[1:]
                 if compare_side_ids[constants.BOTTOM] != side_id:
-                    # print("Mismatch above")
                     return False
 
-        # check the piece below me
+        # Check the piece below
         side_id = side_ids[constants.BOTTOM]
         if side_id != 0:
-            above = positions[row+1][col]
-            if above != None:
-                compare_side_ids = above[1:]
+            below = positions[row+1][col]
+            if below is not None:
+                compare_side_ids = below[1:]
                 if compare_side_ids[constants.TOP] != side_id:
-                    # print("Mismatch below")
                     return False
 
-        # check the piece to the left
+        # Check the piece to the left
         side_id = side_ids[constants.LEFT]
         if side_id != 0:
-            above = positions[row][col-1]
-            if above != None:
-                compare_side_ids = above[1:]
+            left = positions[row][col-1]
+            if left is not None:
+                compare_side_ids = left[1:]
                 if compare_side_ids[constants.RIGHT] != side_id:
-                    # print("Mismatch left piece: %s against: %s with side_id: %i and %i" % (str(piece), str(above), side_id, above[constants.RIGHT]))
                     return False
 
-        # check the piece to the right
+        # Check the piece to the right
         side_id = side_ids[constants.RIGHT]
         if side_id != 0:
-            above = positions[row][col+1]
-            if above != None:
-                compare_side_ids = above[1:]
+            right = positions[row][col+1]
+            if right is not None:
+                compare_side_ids = right[1:]
                 if compare_side_ids[constants.LEFT] != side_id:
-                    # print("Mismatch Right")
                     return False
 
-        # print("Piece: %s fits at row: %i and col: %i" % (str(piece), row, col))
         return True
