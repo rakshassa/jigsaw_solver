@@ -1,7 +1,7 @@
-import Constants
 import copy
 
-from CornerPlacer import CornerPlacer
+import constants
+from corner_placer import CornerPlacer
 
 class Permutations(object):
     def __init__(self, columns, rows, corners):
@@ -16,7 +16,7 @@ class Permutations(object):
         self.base_positions = self.__build_empty_positions()
 
         # hard coding one arbitrary corner piece in the top/left ensures we skip rotated solutions that are otherwise identical
-        self.corner_handler.place_corner(Constants.TOP, Constants.LEFT, self.corners[0], self.base_positions)
+        self.corner_handler.place_corner(constants.TOP, constants.LEFT, self.corners[0], self.base_positions)
 
         print("After initial corner placement:")
         print(self.base_positions)

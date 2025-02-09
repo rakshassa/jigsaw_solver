@@ -1,8 +1,7 @@
 import itertools
 import copy
 
-import Constants
-from PieceUtils import PieceUtils
+from piece_utils import PieceUtils
 
 class SearchComplete(Exception):
     pass

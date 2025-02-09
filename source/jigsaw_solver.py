@@ -1,9 +1,9 @@
 import copy
-from FileHandler import FileHandler
-from Permutations import Permutations
-from SidePlacer import SidePlacer
-from MiddlePlacer import MiddlePlacer
-from Sorter import Sorter
+from file_handler import FileHandler
+from permutations import Permutations
+from side_placer import SidePlacer
+from middle_placer import MiddlePlacer
+from sorter import Sorter
 
 
 class JigsawSolver(object):

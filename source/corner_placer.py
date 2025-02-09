@@ -1,7 +1,7 @@
 import itertools
 
-import Constants
-from PieceUtils import PieceUtils
+import constants
+from piece_utils import PieceUtils
 
 class CornerPlacer(object):
     def __init__(self, columns, rows, corners):
@@ -21,9 +21,9 @@ class CornerPlacer(object):
     def place_corners(self, positions):
         try:
             ordering = next(self.corner_gen) # get next item from the generator
-            self.place_corner(Constants.TOP, Constants.RIGHT, ordering[0], positions)
-            self.place_corner(Constants.BOTTOM, Constants.LEFT, ordering[1], positions)
-            self.place_corner(Constants.BOTTOM, Constants.RIGHT, ordering[2], positions)
+            self.place_corner(constants.TOP, constants.RIGHT, ordering[0], positions)
+            self.place_corner(constants.BOTTOM, constants.LEFT, ordering[1], positions)
+            self.place_corner(constants.BOTTOM, constants.RIGHT, ordering[2], positions)
         except StopIteration:
             return False
 
@@ -31,8 +31,8 @@ class CornerPlacer(object):
 
     def place_corner(self, vertical, horizontal, piece, positions):
         # determine placement
-        row = 0 if vertical == Constants.TOP else self.rows-1
-        column = 0 if horizontal == Constants.LEFT else self.columns-1
+        row = 0 if vertical == constants.TOP else self.rows-1
+        column = 0 if horizontal == constants.LEFT else self.columns-1
         # print("Placing piece at row: %i and column: %i" % (row, column))
 
         # rotate the pice so the ZERO edges are in the right place

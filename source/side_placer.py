@@ -1,7 +1,8 @@
 import itertools
 import copy
-import Constants
-from PieceUtils import PieceUtils
+
+import constants
+from piece_utils import PieceUtils
 
 class SidePlacer(object):
     def __init__(self, columns, rows, sides):
@@ -48,14 +49,14 @@ class SidePlacer(object):
             # print("Try top")
             piece = ordering[element_idx]
             element_idx += 1
-            rotated = self.rotate_side(Constants.TOP, None, piece)
+            rotated = self.rotate_side(constants.TOP, None, piece)
             self.place_side(0, col, rotated, positions)
 
             # BOTTOM
             # print("try bottom")
             piece = ordering[element_idx]
             element_idx +=1
-            rotated = self.rotate_side(Constants.BOTTOM, None, piece)
+            rotated = self.rotate_side(constants.BOTTOM, None, piece)
             self.place_side(self.rows-1, col, rotated, positions) # bottom
 
         # for each middle row
@@ -66,13 +67,13 @@ class SidePlacer(object):
             # print("Try Left")
             piece = ordering[element_idx]
             element_idx +=1
-            rotated = self.rotate_side(None, Constants.LEFT, piece)
+            rotated = self.rotate_side(None, constants.LEFT, piece)
             self.place_side(row, 0, rotated, positions) # LEFT
 
             # print("Try right")
             piece = ordering[element_idx]
             element_idx +=1
-            rotated = self.rotate_side(None, Constants.RIGHT, piece)
+            rotated = self.rotate_side(None, constants.RIGHT, piece)
             self.place_side(row, self.columns-1, rotated, positions) # RIGHT
 
         print("All sides fit")

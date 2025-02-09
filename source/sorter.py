@@ -2,7 +2,7 @@
 # The sides of the pieces are named sequentially, clockwise, starting with the left side.
 # Each piece is numbered sequentially, and the first piece is the piece number 1.
 
-class Sorter(object):
+class Sorter:
     def sort_pieces(self, pieces):
         corners = []
         sides = []
