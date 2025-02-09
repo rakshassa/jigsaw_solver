@@ -1,7 +1,14 @@
+"""
+Parses puzzle data and makes the results easily accessible
+"""
+
 from sorter import Sorter
 from file_handler import FileHandler
 
 class DataParser:
+    """
+    Parses puzzle data and makes the results easily accessible
+    """
     def __init__(self, verbose):
         self.verbose = verbose
         self.files = FileHandler()
